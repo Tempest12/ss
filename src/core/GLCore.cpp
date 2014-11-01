@@ -28,8 +28,6 @@ static std::chrono::high_resolution_clock::time_point currentClock;
 
 void GLCore::init(int argc, char** argv)
 {
-
-	Util::Log::init(false, INFO);	
 }
 
 void GLCore::draw(void)
