@@ -1,0 +1,28 @@
+# Compiled Object files
+*.slo
+*.lo
+*.o
+*.obj
+
+# Compiled Dynamic libraries
+*.so
+*.dylib
+
+# Compiled Static libraries
+*.lai
+*.la
+*.a
+
+#CMake stuff:
+*.cmake
+CMakeCache.txt
+CMakeFiles/*
+Makefile
+src/Makefile
+src/CMakeFiles
+
+#Binary files:
+ss
+
+#Ignore program outputs:
+log.txt
