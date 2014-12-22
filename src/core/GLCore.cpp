@@ -11,8 +11,8 @@
 #include <GL/freeglut.h>
 
 
-//#include "core/Camera.hpp"
 #include "core/GLCore.hpp"
+#include "levels/LevelList.hpp"
 #include "math/Vector3f.hpp"
 #include "resources/Texture.hpp"
 #include "util/Config.hpp"
@@ -25,13 +25,39 @@ using namespace Core;
 
 static std::chrono::high_resolution_clock::time_point lastClock;
 static std::chrono::high_resolution_clock::time_point currentClock;
+static Levels::Level* currentLevel;
 
 void GLCore::init(int argc, char** argv)
 {
+	//Context init:
+	glutInit(&argc, argv);
+	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+	glutInitContextVersion(3, 0);
+	glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);
+
+	//Window init:
+	glutInitWindowSize(Util::Config::convertSettingToInt("window", "width" ),
+					   Util::Config::convertSettingToInt("window", "height"));
+	glutCreateWindow("Solar Shard");
+
+	//Register Callbacks:
+	glutDisplayFunc      (GLCore::draw);
+	glutIdleFunc         (GLCore::runLoop);
+	glutKeyboardFunc     (GLCore::keyboard);
+	glutMouseFunc        (GLCore::mouseClick);
+	glutMotionFunc       (GLCore::mouseActiveMotion);
+	glutPassiveMotionFunc(GLCore::mousePassiveMotion);
+	glutSpecialFunc      (GLCore::functionKeys);
+
+	//glutPostRedisplay();
+	currentLevel = new Levels::DemoLevel();
 }
 
 void GLCore::draw(void)
 {
+	currentLevel->render();
+
+	glutPostRedisplay();
 }
 
 void GLCore::functionKeys(int keyCode, int positionX, int positionY)
@@ -63,12 +89,10 @@ void GLCore::mousePassiveMotion(int positionX, int positionY)
 void GLCore::runLoop(void)
 {
 	currentClock = std::chrono::high_resolution_clock::now();
-	update(std::chrono::duration_cast<std::chrono::duration<float>>(currentClock - lastClock).count());
+	float temp = std::chrono::duration_cast<std::chrono::duration<float>>(currentClock - lastClock).count();
 	lastClock = currentClock;
 
-	draw();
-
-	//glutPostRedisplay(); Is this needed?
+	currentLevel->update(temp);
 }
 
 void GLCore::uninit(int returnCode)
@@ -77,8 +101,4 @@ void GLCore::uninit(int returnCode)
 	Util::Config::uninit();
 
 	exit(returnCode);
-}
-
-void GLCore::update(float deltaTime)
-{
 }

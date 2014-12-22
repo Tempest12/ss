@@ -15,9 +15,9 @@ int main(int argc, char** argv)
 	//Init Code:
 	Util::Config::init();
 	Util::Log::   init(false, INFO);
-	Core::GLCore::init(argc, argv);
+	Core::GLCore::init(argc , argv);
 
-	//glutMainLoop();
+	glutMainLoop();
 
 	return result;	
 }
