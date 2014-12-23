@@ -38,14 +38,18 @@ void DemoLevel::render(void)
 {
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-	/*glBegin(GL_TRIANGLES);
-		glVertex3f( 1.0f, 0.0f, 1.0f);
-		glVertex3f( 0.0f, 1.0f, 1.0f);
-		glVertex3f(-1.0f, 0.0f, 1.0f);
-	glEnd();*/
-
 	glBegin(GL_POINTS);
-		glVertex2f(0.0f, 0.0f);
+
+	for(float x = -1.0; x <= 1.0; x+= 0.00125)
+	{
+		glVertex2f(x, x);
+	}
+
+	for(float x = -1.0; x <= 1.0; x+= 0.00125)
+	{
+		glVertex2f(x, -x);
+	}
+
 	glEnd();
 
 	glutSwapBuffers();
