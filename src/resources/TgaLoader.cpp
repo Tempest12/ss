@@ -95,7 +95,7 @@ void TgaLoader::loadFromFile(const std::string& fileName, Texture* texture)
 	{
 		if(texture->pixels[index] > 1.0)
 		{
-			std::cout << "Whoops pixels value is not correcta." << std::endl;
+			std::cout << "Whoops pixels value is not correct." << std::endl;
 		}
 	}
 }
