@@ -35,6 +35,21 @@ namespace Core
 	private:
 
 
+	//Static Stuff:
+	
+	//Variables:
+	public:
+	protected:
+	private:
+
+	//Functions:
+	public:
+
+		static Color* getRandomColor(void);
+
+	protected:
+	private:
+
 	};
 }
 
