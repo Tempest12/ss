@@ -37,6 +37,18 @@ namespace Resources
     
     protected:
     private:
+
+    //Static Variables:
+    public:
+        static std::string FileExtension;
+
+    protected:
+    private:
+
+    //Static Functions:
+    public:
+    protected:
+    private:
     };
 }
 

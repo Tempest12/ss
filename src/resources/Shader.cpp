@@ -70,25 +70,29 @@ void Shader::getTypeFromFileName(void)
     
     temp = &pieces[count - 1];
     
-    if(Util::StringLib::equalsIgnoreCase(temp, "vert"))
+    if(Util::StringLib::equalsIgnoreCase(temp,      VertexShaderExtension))
     {
         this->type = VERTEX;
     }
-    else if(Util::StringLib::equalsIgnoreCase(temp, "tesI"))
+    else if(Util::StringLib::equalsIgnoreCase(temp, TessCtrlShaderExtension))
     {
         this->type = TESSCONTROL;
     }
-    else if(Util::StringLib::equalsIgnoreCase(temp, "tesO"))
+    else if(Util::StringLib::equalsIgnoreCase(temp, TessEvalShaderExtension))
     {
         this->type = TESSEVAL;
     }
-    else if(Util::StringLib::equalsIgnoreCase(temp, "geom"))
+    else if(Util::StringLib::equalsIgnoreCase(temp, GeometryShaderExtension))
     {
         this->type = GEOMETRY;
     }
-    else if(Util::StringLib::equalsIgnoreCase(temp, "frag"))
+    else if(Util::StringLib::equalsIgnoreCase(temp, FragmentShaderExtension))
     {
         this->type = FRAGMENT;
+    }
+    else if(Util::StringLib::equalsIgnoreCase(temp, ComputeShaderExtension))
+    {
+        this->type = COMPUTE;
     }
     else
     {
@@ -138,3 +142,14 @@ void Shader::setSource(void)
     delete[] shaderSource;    
     delete strings;    
 }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////
+//  Static Stuff:
+///////////////////////////////////////////////////////////////////////////////////////////////////
+
+std::string Shader::VertexShaderExtension   = ".vert";
+std::string Shader::TessCtrlShaderExtension = ".tessCtrl";
+std::string Shader::TessEvalShaderExtension = ".tessEval";
+std::string Shader::GeometryShaderExtension = ".geom";
+std::string Shader::FragmentShaderExtension = ".frag";
+std::string Shader::ComputeShaderExtension  = ".comp";

@@ -21,9 +21,7 @@ ShaderManager::ShaderManager(void)
     
     
     this->loadShaders();
-    this->loadPrograms();
-    
-    
+    this->loadPrograms();  
 }
 
 ShaderManager::~ShaderManager(void)
@@ -66,9 +64,10 @@ ShaderProgram* ShaderManager::getShaderProgram(const std::string* name)
 
 void ShaderManager::loadShaders(void)
 {
-    DIR* directory = opendir("./data/shaders");
+    DIR*           directory = opendir("./data/shaders");
     struct dirent* fileName;
-    Shader* newShader;
+    Shader*        newShader;
+    std::string    tempString;
     
     if(directory == NULL)
     {
@@ -78,18 +77,23 @@ void ShaderManager::loadShaders(void)
     fileName = readdir(directory);
     
     while(fileName != NULL)
-    {
-        newShader = new Shader(fileName->d_name);
-        
-        if(newShader->type != INVALID)
+    {   
+        tempString.assign(fileName->d_name);
+
+        if(!Util::StringLib::equalsIgnoreCase(tempString, ShaderProgram::FileExtension))
         {
-            this->shaders.push_back(newShader);
-        }
-        else
-        {
-            delete newShader;
-        }
+            newShader = new Shader(fileName->d_name);
         
+            if(newShader->type != INVALID)
+            {
+                this->shaders.push_back(newShader);
+            }
+            else
+            {
+                delete newShader;
+            }
+        }
+
         fileName = readdir(directory);
     }
 }
