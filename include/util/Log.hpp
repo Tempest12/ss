@@ -5,39 +5,39 @@
 
 enum LogLevel
 {
-	DEBUG,
-	INFO,
-	ERROR,
-	FATAL,
-	SPECIAL
+    DEBUG,
+    INFO,
+    ERROR,
+    FATAL,
+    SPECIAL
 };
 
 namespace Util
 {
-	class Log
-	{
-	//Variables:
-	public:
-	protected:
-	private:
+    class Log
+    {
+    //Variables:
+    public:
+    protected:
+    private:
 
-	//Functions
-	public:
-		static bool init(bool append, int log_level);
-		static void uninit(void);
+    //Functions
+    public:
+        static bool init(bool append, int log_level);
+        static void uninit(void);
 
-		static void setLevel(LogLevel level);
+        static void setLevel(LogLevel level);
 
-		static void writeDebug  (const std::string& message);
-		static void writeInfo   (const std::string& message);
-		static void writeError  (const std::string& message);
-		static void writeFatal  (const std::string& message);
-		static void writeSpecial(const std::string& message);
+        static void writeDebug  (const std::string& message);
+        static void writeInfo   (const std::string& message);
+        static void writeError  (const std::string& message);
+        static void writeFatal  (const std::string& message);
+        static void writeSpecial(const std::string& message);
 
-	protected:
-	private:
-		static void writeMessage(const std::string& prefix, const std::string& message);
-	};
+    protected:
+    private:
+        static void writeMessage(const std::string& prefix, const std::string& message);
+    };
 }
 
 #endif

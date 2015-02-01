@@ -100,10 +100,11 @@ void ShaderManager::loadShaders(void)
 
 void ShaderManager::loadPrograms(void)
 {
-    DIR* directory = opendir("./data/shaders");
+    DIR*           directory = opendir("./data/shaders");
     struct dirent* fileName;
     ShaderProgram* newProgram;
-    
+    std::string    tempString;
+
     if(directory == NULL)
     {
         Main::die("Unable to open shader directory .");
@@ -113,18 +114,23 @@ void ShaderManager::loadPrograms(void)
     
     while(fileName != NULL)
     {
-        newProgram = new ShaderProgram(fileName->d_name);
-        
-        if(newProgram->status == true)
+        tempString.assign(fileName->d_name);
+
+        if(Util::StringLib::equalsIgnoreCase(tempString, ShaderProgram::FileExtension))
         {
-            this->programs.push_back(newProgram);
+            newProgram = new ShaderProgram(fileName->d_name);
+            
+            if(newProgram->status == true)
+            {
+                this->programs.push_back(newProgram);
+            }
+            else
+            {
+                delete newProgram;
+            }
+                        
+            fileName = readdir(directory);
         }
-        else
-        {
-            delete newProgram;
-        }
-                    
-        fileName = readdir(directory);
     }
 }
 

@@ -14,6 +14,9 @@
 
 using namespace Resources;
 
+//Local debug status for this code:
+static LogLevel localDebugLevel = INFO;
+
 ShaderProgram::ShaderProgram(char* fileName)
 {
     this->name.assign(fileName);    
