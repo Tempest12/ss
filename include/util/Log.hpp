@@ -28,6 +28,7 @@ namespace Util
 
         static void setLevel(LogLevel level);
 
+        static void writeAt     (LogLevel level, const std::string& message);
         static void writeDebug  (const std::string& message);
         static void writeInfo   (const std::string& message);
         static void writeError  (const std::string& message);

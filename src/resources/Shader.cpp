@@ -67,10 +67,10 @@ void Shader::getTypeFromFileName(void)
     int count;
     
     pieces = Util::StringLib::split(&this->name, '.', &count);
-    
+
     temp = &pieces[count - 1];
     
-    if(Util::StringLib::equalsIgnoreCase(temp,      VertexShaderExtension))
+    if(Util::StringLib::equalsIgnoreCase(    temp,  VertexShaderExtension))
     {
         this->type = VERTEX;
     }
@@ -96,7 +96,7 @@ void Shader::getTypeFromFileName(void)
     }
     else
     {
-        Util::Log::writeError("File: " + *temp + " isn't a shader file.");
+        Util::Log::writeError("File: " + this->name + " isn't a shader file.");
         this->type = INVALID;
     }
     
@@ -147,9 +147,9 @@ void Shader::setSource(void)
 //  Static Stuff:
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::string Shader::VertexShaderExtension   = ".vert";
-std::string Shader::TessCtrlShaderExtension = ".tessCtrl";
-std::string Shader::TessEvalShaderExtension = ".tessEval";
-std::string Shader::GeometryShaderExtension = ".geom";
-std::string Shader::FragmentShaderExtension = ".frag";
-std::string Shader::ComputeShaderExtension  = ".comp";
+std::string Shader::VertexShaderExtension   = "vert";
+std::string Shader::TessCtrlShaderExtension = "tessCtrl";
+std::string Shader::TessEvalShaderExtension = "tessEval";
+std::string Shader::GeometryShaderExtension = "geom";
+std::string Shader::FragmentShaderExtension = "frag";
+std::string Shader::ComputeShaderExtension  = "comp";

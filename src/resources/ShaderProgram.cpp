@@ -19,14 +19,13 @@ static LogLevel localDebugLevel = INFO;
 
 ShaderProgram::ShaderProgram(char* fileName)
 {
-    this->name.assign(fileName);    
+    this->name.assign(fileName);
     this->id = glCreateProgram();
-    
-    ShaderManager* shaderManager = ShaderManager::getShaderManager();   
+
+    ShaderManager* shaderManager = ShaderManager::getShaderManager();
     std::vector<std::string*>* strings = Util::Parsing::getStringArray(&this->name);
-    //std::string* line = NULL;
-    //int count = 0;
-    
+
+
     for(unsigned int index = 0; index < strings->size(); index++)
     {
         //Ignore blank and comment lines.
@@ -35,12 +34,14 @@ ShaderProgram::ShaderProgram(char* fileName)
            Util::StringLib::startsWith((*strings)[index], "#"))    
         {
             continue;
-        }      
+        }
         
         this->shaders[this->shaderCount] = shaderManager->getShader((*strings)[index]);
         glAttachShader(this->id, this->shaders[shaderCount]->id);
-        this->shaderCount++;        
+        this->shaderCount++;
     }
+
+    glLinkProgram(this->id);
 }
 
 ShaderProgram::~ShaderProgram()
@@ -51,4 +52,4 @@ ShaderProgram::~ShaderProgram()
 //  Static Stuff:
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 
-std::string ShaderProgram::FileExtension = ".pgm";
+std::string ShaderProgram::FileExtension = "pgm";

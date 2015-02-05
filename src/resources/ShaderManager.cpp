@@ -1,5 +1,6 @@
 #include <fstream>
 #include <iostream>
+#include <sstream>
 #include <string>
 #include <vector>
 
@@ -10,18 +11,24 @@
 #include "resources/ShaderProgram.hpp"
 #include "resources/ShaderManager.hpp"
 #include "util/Config.hpp"
+#include "util/Log.hpp"
 #include "util/StringLib.hpp"
 
 using namespace Resources;
+
+//Debug status for this code:
+static LogLevel localDebugLevel = SPECIAL;
 
 ShaderManager::ShaderManager(void)
 {
     this->shaders  = std::vector<Shader*>();
     this->programs = std::vector<ShaderProgram*>(); 
-    
-    
+
     this->loadShaders();
-    this->loadPrograms();  
+    Util::Log::writeAt(localDebugLevel, "Found and loaded " + std::to_string(this->shaders.size()) + " shaders.");
+
+    this->loadPrograms();
+    Util::Log::writeAt(localDebugLevel, "Found and loaded " + std::to_string(this->programs.size()) + " programs");
 }
 
 ShaderManager::~ShaderManager(void)

@@ -15,6 +15,7 @@
 #include "levels/LevelList.hpp"
 #include "math/Vector3f.hpp"
 #include "resources/Texture.hpp"
+#include "resources/ShaderManager.hpp"
 #include "util/Config.hpp"
 #include "util/Log.hpp"
 
@@ -29,35 +30,38 @@ static Levels::Level* currentLevel;
 
 void GLCore::init(int argc, char** argv)
 {
-	//Context init:
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
-	glutInitContextVersion(3, 0);
-	glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);
+    //Context init:
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
+    glutInitContextVersion(3, 0);
+    glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);
 
-	//Window init:
-	glutInitWindowSize(Util::Config::convertSettingToInt("window", "width" ),
-					   Util::Config::convertSettingToInt("window", "height"));
-	glutCreateWindow("Solar Shard");
+    //Window init:
+    glutInitWindowSize(Util::Config::convertSettingToInt("window", "width" ),
+                       Util::Config::convertSettingToInt("window", "height"));
+    glutCreateWindow("Solar Shard");
 
-	//Register Callbacks:
-	glutDisplayFunc      (GLCore::draw);
-	glutIdleFunc         (GLCore::runLoop);
-	glutKeyboardFunc     (GLCore::keyboard);
-	glutMouseFunc        (GLCore::mouseClick);
-	glutMotionFunc       (GLCore::mouseActiveMotion);
-	glutPassiveMotionFunc(GLCore::mousePassiveMotion);
-	glutSpecialFunc      (GLCore::functionKeys);
+    //Register Callbacks:
+    glutDisplayFunc      (GLCore::draw);
+    glutIdleFunc         (GLCore::runLoop);
+    glutKeyboardFunc     (GLCore::keyboard);
+    glutMouseFunc        (GLCore::mouseClick);
+    glutMotionFunc       (GLCore::mouseActiveMotion);
+    glutPassiveMotionFunc(GLCore::mousePassiveMotion);
+    glutSpecialFunc      (GLCore::functionKeys);
 
-	//glutPostRedisplay();
-	currentLevel = new Levels::DemoLevel();
+    //Load resources:
+    Resources::ShaderManager::init();
+
+    //glutPostRedisplay();
+    currentLevel = new Levels::DemoLevel();
 }
 
 void GLCore::draw(void)
 {
-	currentLevel->render();
+    currentLevel->render();
 
-	glutPostRedisplay();
+    glutPostRedisplay();
 }
 
 void GLCore::functionKeys(int keyCode, int positionX, int positionY)
@@ -66,12 +70,12 @@ void GLCore::functionKeys(int keyCode, int positionX, int positionY)
 
 void GLCore::keyboard(unsigned char keyCode, int positionX, int positionY)
 {
-	keyCode = tolower(keyCode);
+    keyCode = tolower(keyCode);
 
-	if(keyCode == 27)//KeyCode for escape.
-	{
-		uninit(0);
-	}
+    if(keyCode == 27)//KeyCode for escape.
+    {
+        uninit(0);
+    }
 }
 
 void GLCore::mouseClick(int buttonCode, int buttonState, int positionX, int positionY)
@@ -88,17 +92,17 @@ void GLCore::mousePassiveMotion(int positionX, int positionY)
 
 void GLCore::runLoop(void)
 {
-	currentClock = std::chrono::high_resolution_clock::now();
-	float temp = std::chrono::duration_cast<std::chrono::duration<float>>(currentClock - lastClock).count();
-	lastClock = currentClock;
+    currentClock = std::chrono::high_resolution_clock::now();
+    float temp = std::chrono::duration_cast<std::chrono::duration<float>>(currentClock - lastClock).count();
+    lastClock = currentClock;
 
-	currentLevel->update(temp);
+    currentLevel->update(temp);
 }
 
 void GLCore::uninit(int returnCode)
 {
-	Util::Log::uninit();
-	Util::Config::uninit();
+    Util::Log::uninit();
+    Util::Config::uninit();
 
-	exit(returnCode);
+    exit(returnCode);
 }
