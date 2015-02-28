@@ -1,6 +1,7 @@
 #include <chrono>
 #include <iostream>
 #include <random>
+#include <sstream>
 #include <vector>
 
 
@@ -8,7 +9,7 @@
 #include <math.h>
 #include <stdlib.h>
 #include <time.h>
-#include <GL/freeglut.h>
+#include <SDL2/SDL.h>
 
 
 #include "core/GLCore.hpp"
@@ -31,24 +32,27 @@ static Levels::Level* currentLevel;
 void GLCore::init(int argc, char** argv)
 {
     //Context init:
-    glutInit(&argc, argv);
+    /*glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInitContextVersion(3, 0);
-    glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);
+    glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);*/
+
+    //Glew Init:
+    //GLenum errorCode = glewInit();
 
     //Window init:
-    glutInitWindowSize(Util::Config::convertSettingToInt("window", "width" ),
-                       Util::Config::convertSettingToInt("window", "height"));
-    glutCreateWindow("Solar Shard");
+    //glutInitWindowSize(Util::Config::convertSettingToInt("window", "width" ),
+    //                   Util::Config::convertSettingToInt("window", "height"));
+    //glutCreateWindow("Solar Shard");
 
     //Register Callbacks:
-    glutDisplayFunc      (GLCore::draw);
+    /*glutDisplayFunc      (GLCore::draw);
     glutIdleFunc         (GLCore::runLoop);
     glutKeyboardFunc     (GLCore::keyboard);
     glutMouseFunc        (GLCore::mouseClick);
     glutMotionFunc       (GLCore::mouseActiveMotion);
     glutPassiveMotionFunc(GLCore::mousePassiveMotion);
-    glutSpecialFunc      (GLCore::functionKeys);
+    glutSpecialFunc      (GLCore::functionKeys);*/
 
     //Load resources:
     Resources::ShaderManager::init();
@@ -61,7 +65,7 @@ void GLCore::draw(void)
 {
     currentLevel->render();
 
-    glutPostRedisplay();
+    //glutPostRedisplay();
 }
 
 void GLCore::functionKeys(int keyCode, int positionX, int positionY)

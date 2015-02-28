@@ -10,22 +10,22 @@
 
 int main(int argc, char** argv)
 {
-	int result = 0;
+    int result = 0;
 
-	//Init Code:
-	Util::Config::init();
-	Util::Log::   init(false, INFO);
-	Core::GLCore::init(argc , argv);
+    //Init Code:
+    Util::Config::init();
+    Util::Log::   init(false, INFO);
+    Core::GLCore::init(argc , argv);
 
-	glutMainLoop();
+    //glutMainLoop();
 
-	return result;	
+    return result;
 }
 
 void Main::die(const std::string& errorMessage)
 {
-	Util::Log::writeFatal(errorMessage);
-	std::cout << "Exiting" << std::endl;
+    Util::Log::writeFatal(errorMessage);
+    std::cout << "Exiting" << std::endl;
 
-	exit(1);
+    exit(1);
 }

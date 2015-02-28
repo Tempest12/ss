@@ -20,11 +20,10 @@ static LogLevel localDebugLevel = INFO;
 ShaderProgram::ShaderProgram(char* fileName)
 {
     this->name.assign(fileName);
-    this->id = glCreateProgram();
+    //this->id = glCreateProgram();
 
     ShaderManager* shaderManager = ShaderManager::getShaderManager();
     std::vector<std::string*>* strings = Util::Parsing::getStringArray(&this->name);
-
 
     for(unsigned int index = 0; index < strings->size(); index++)
     {
@@ -37,11 +36,11 @@ ShaderProgram::ShaderProgram(char* fileName)
         }
         
         this->shaders[this->shaderCount] = shaderManager->getShader((*strings)[index]);
-        glAttachShader(this->id, this->shaders[shaderCount]->id);
+        //glAttachShader(this->id, this->shaders[shaderCount]->id);
         this->shaderCount++;
     }
 
-    glLinkProgram(this->id);
+    //glLinkProgram(this->id);
 }
 
 ShaderProgram::~ShaderProgram()
