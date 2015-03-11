@@ -48,7 +48,7 @@ std::string StringLib::emptyString = "";
  */
 bool StringLib::contains(std::string& base, std::string& target)
 {
-	return base.find(target) != std::string::npos;
+    return base.find(target) != std::string::npos;
 }
 
 bool StringLib::contains(std::string& base, const std::string& target)

@@ -71,26 +71,29 @@ ShaderProgram* ShaderManager::getShaderProgram(const std::string* name)
 
 void ShaderManager::loadShaders(void)
 {
-    DIR*           directory = opendir("./data/shaders");
+    DIR*           directory = opendir(shaderDirectory.c_str());
     struct dirent* fileName;
     Shader*        newShader;
     std::string    tempString;
-    
+
     if(directory == NULL)
     {
         Main::die("Unable to open shader directory .");
     }
-    
+
     fileName = readdir(directory);
     
     while(fileName != NULL)
-    {   
-        tempString.assign(fileName->d_name);
+    {
+        tempString.assign(shaderDirectory);
+        tempString.append(fileName->d_name);
 
-        if(!Util::StringLib::equalsIgnoreCase(tempString, ShaderProgram::FileExtension))
+        if(!Util::StringLib::endsWith(tempString, ShaderProgram::FileExtension))
         {
-            newShader = new Shader(fileName->d_name);
-        
+            newShader = new Shader(&tempString);
+
+            std::cout << tempString << std::endl;
+
             if(newShader->type != INVALID)
             {
                 this->shaders.push_back(newShader);
@@ -107,7 +110,7 @@ void ShaderManager::loadShaders(void)
 
 void ShaderManager::loadPrograms(void)
 {
-    DIR*           directory = opendir("./data/shaders");
+    DIR*           directory = opendir(shaderDirectory.c_str());
     struct dirent* fileName;
     ShaderProgram* newProgram;
     std::string    tempString;
@@ -121,12 +124,15 @@ void ShaderManager::loadPrograms(void)
     
     while(fileName != NULL)
     {
-        tempString.assign(fileName->d_name);
+        tempString.assign(shaderDirectory);
+        tempString.append(fileName->d_name);
 
-        if(Util::StringLib::equalsIgnoreCase(tempString, ShaderProgram::FileExtension))
+        std::cout << tempString << std::endl;
+
+        if(Util::StringLib::endsWith(tempString, ShaderProgram::FileExtension))
         {
-            newProgram = new ShaderProgram(fileName->d_name);
-            
+            newProgram = new ShaderProgram(&tempString);
+
             if(newProgram->status == true)
             {
                 this->programs.push_back(newProgram);
@@ -135,7 +141,7 @@ void ShaderManager::loadPrograms(void)
             {
                 delete newProgram;
             }
-                        
+
             fileName = readdir(directory);
         }
     }
@@ -144,6 +150,7 @@ void ShaderManager::loadPrograms(void)
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //  Static Stuff:
 ///////////////////////////////////////////////////////////////////////////////////////////////////
+std::string    ShaderManager::shaderDirectory = "./data/shaders/";
 ShaderManager* ShaderManager::shaderManager;
 
 ShaderManager* ShaderManager::getShaderManager(void)

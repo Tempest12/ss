@@ -30,7 +30,7 @@ namespace Resources
     //Functions:
     public:
     
-        ShaderProgram(char* fileName);
+        ShaderProgram(std::string* fileName);
         ~ShaderProgram();
         
         void link(void);

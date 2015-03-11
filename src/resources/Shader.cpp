@@ -14,9 +14,9 @@
 
 using namespace Resources;
 
-Shader::Shader(char* fileName)
+Shader::Shader(std::string* fileName)
 {
-    this->name.assign(fileName);
+    this->name.assign(*fileName);
 
     this->getTypeFromFileName();
 
@@ -54,8 +54,7 @@ void Shader::compile(void)
         //glGetShaderiv(this->id, GL_INFO_LOG_LENGTH, &logSize);   
         errorLog = new char[logSize];
         //glGetShaderInfoLog(this->id, logSize, NULL, errorLog);
-    
-        Util::Log::writeFatal("Shader \"" + this->name + "\" Failed to compile.  Compilation error message \"" + errorLog + "\".");
+
         Main::die("Shader \"" + this->name + "\" Failed to compile.  Compilation error message \"" + errorLog + "\".");
     }
 }
@@ -65,7 +64,7 @@ void Shader::getTypeFromFileName(void)
     std::string* pieces;
     std::string* temp;
     int count;
-    
+
     pieces = Util::StringLib::split(&this->name, '.', &count);
 
     temp = &pieces[count - 1];
@@ -139,14 +138,13 @@ void Shader::setSource(void)
     //glShaderSource(this->id, 1, (const char**)&shaderSource, (int*)&shaderLength);
     
     //Clean up:
-    delete[] shaderSource;    
-    delete strings;    
+    delete[] shaderSource;
+    delete strings;
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
 //  Static Stuff:
 ///////////////////////////////////////////////////////////////////////////////////////////////////
-
 std::string Shader::VertexShaderExtension   = "vert";
 std::string Shader::TessCtrlShaderExtension = "tessCtrl";
 std::string Shader::TessEvalShaderExtension = "tessEval";

@@ -1,4 +1,6 @@
+varying vec4 color;
+
 void main()
 {
-    gl_Position = gl_Position = gl_ModelViewProjectionMatrix * gl_Vertex;
+    gl_position = gl_ModelViewProjectionMatrix * gl_Vertex;
 }

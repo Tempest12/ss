@@ -27,29 +27,30 @@ namespace Resources
             
     protected:
     private:
-        
+
         void loadShaders(void);
-        void loadPrograms(void);        
-          
+        void loadPrograms(void);
+
         //Singleton:
         ShaderManager(void);
         ~ShaderManager(void);
-        
+
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     // Static Stuff:
     ///////////////////////////////////////////////////////////////////////////////////////////////////
     public:
     protected:
-    private:    
+    private:
+        static std::string    shaderDirectory;
         static ShaderManager* shaderManager;
-        
-    //Static Functions:    
+
+    //Static Functions:
     public:
-    
+
         static ShaderManager* getShaderManager(void);
         static void           init(void);
         static void           uninit(void);
-    
+
     protected:
     private:
     };

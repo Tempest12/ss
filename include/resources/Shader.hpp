@@ -41,7 +41,7 @@ namespace Resources
     //Functions:
     public:
         
-        Shader(char* fileName);
+        Shader(std::string* fileName);
         ~Shader();
         
         void compile(void);

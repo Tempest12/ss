@@ -1,4 +1,5 @@
 #include <fstream>
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -10,13 +11,13 @@ using namespace Util;
 
 void Parsing::getNewLine(std::ifstream* file, std::string* line, int* lineNumber)
 {
-	std::getline(*file, *line);
-	StringLib::trim(line);
+    std::getline(*file, *line);
+    StringLib::trim(line);
 
-	if(lineNumber != NULL)
-	{   
-	    (*lineNumber)++;
-	}
+    if(lineNumber != NULL)
+    {   
+        (*lineNumber)++;
+    }
 }
 
 std::vector<std::string*>* Parsing::getStringArray(std::string* fileName)
@@ -31,7 +32,9 @@ std::vector<std::string*>* Parsing::getStringArray(std::string* fileName)
     
     if((file.is_open() && file.good()) == false)
     {
-        Main::die("Parsing:  Unable to open file: " + *fileName);    
+        std::cout << file.is_open() << " and " << file.good() << std::endl;
+
+        Main::die("Parsing:  Unable to open file: " + *fileName);
     }
     
     while(file.good())
@@ -39,13 +42,13 @@ std::vector<std::string*>* Parsing::getStringArray(std::string* fileName)
         Parsing::getNewLine(&file, &line, &lineNumber);
         
         if(StringLib::isWhiteSpace(line) || line[0] == '#' || (line[0] == '/' && line[1] == '/'))
-		{
-			continue;
-		}
-		else
-		{
-		    array->push_back(new std::string(line));
-		}
+        {
+            continue;
+        }
+        else
+        {
+            array->push_back(new std::string(line));
+        }
     }
     
     return array;

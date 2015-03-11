@@ -17,9 +17,9 @@ using namespace Resources;
 //Local debug status for this code:
 static LogLevel localDebugLevel = INFO;
 
-ShaderProgram::ShaderProgram(char* fileName)
+ShaderProgram::ShaderProgram(std::string* fileName)
 {
-    this->name.assign(fileName);
+    this->name.assign(*fileName);
     //this->id = glCreateProgram();
 
     ShaderManager* shaderManager = ShaderManager::getShaderManager();
