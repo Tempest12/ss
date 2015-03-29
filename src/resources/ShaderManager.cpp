@@ -23,12 +23,6 @@ ShaderManager::ShaderManager(void)
 {
     this->shaders  = std::vector<Shader*>();
     this->programs = std::vector<ShaderProgram*>(); 
-
-    this->loadShaders();
-    Util::Log::writeAt(localDebugLevel, "Found and loaded " + std::to_string(this->shaders.size()) + " shaders.");
-
-    this->loadPrograms();
-    Util::Log::writeAt(localDebugLevel, "Found and loaded " + std::to_string(this->programs.size()) + " programs");
 }
 
 ShaderManager::~ShaderManager(void)
@@ -37,20 +31,27 @@ ShaderManager::~ShaderManager(void)
     {
         delete this->shaders[index];
     }
+
+    for(unsigned int index = 0; index < this->programs.size(); index++)
+    {
+        delete this->programs[index];
+    }
 }
 
 Shader* ShaderManager::getShader(const std::string* name)
 {
     for(unsigned int index = 0; index < this->shaders.size(); index++)
     {
-        if(name->compare(this->shaders[index]->name) == 0)
+        // Using "endsWith" here because we're just looking for the right file name. (Not the path.)
+        // The rest of this program isn't going to care about what directory the shaders live in.
+        if(Util::StringLib::endsWith(this->shaders[index]->name, *name))
         {
             return this->shaders[index];
         }
     }
-    
+
     Main::die("Shader Manager: Shader requested but, not found: " + *name);
-    
+
     return NULL;
 }
 
@@ -58,14 +59,16 @@ ShaderProgram* ShaderManager::getShaderProgram(const std::string* name)
 {
     for(unsigned int index = 0; index < this->programs.size(); index++)
     {
-        if(name->compare(this->programs[index]->name) == 0)
+        // Using "endsWith" here because we're just looking for the right file name. (Not the path.)
+        // The rest of this program isn't going to care about what directory the shader programs live in.
+        if(Util::StringLib::endsWith(this->programs[index]->name, *name))
         {
             return this->programs[index];
         }
     }
-    
+
     Main::die("Shader Manager:  Program requested but, not found: " + *name);
-    
+
     return NULL;
 }
 
@@ -88,11 +91,14 @@ void ShaderManager::loadShaders(void)
         tempString.assign(shaderDirectory);
         tempString.append(fileName->d_name);
 
-        if(!Util::StringLib::endsWith(tempString, ShaderProgram::FileExtension))
+        if(Util::StringLib::endsWith(tempString, Shader::VertexShaderExtension  ) ||
+           Util::StringLib::endsWith(tempString, Shader::TessCtrlShaderExtension) ||
+           Util::StringLib::endsWith(tempString, Shader::TessEvalShaderExtension) ||
+           Util::StringLib::endsWith(tempString, Shader::GeometryShaderExtension) ||
+           Util::StringLib::endsWith(tempString, Shader::FragmentShaderExtension) ||
+           Util::StringLib::endsWith(tempString, Shader::ComputeShaderExtension )  )
         {
             newShader = new Shader(&tempString);
-
-            std::cout << tempString << std::endl;
 
             if(newShader->type != INVALID)
             {
@@ -106,6 +112,8 @@ void ShaderManager::loadShaders(void)
 
         fileName = readdir(directory);
     }
+
+    Util::Log::writeAt(localDebugLevel, "Found and loaded " + std::to_string(this->shaders.size()) + " shaders.");
 }
 
 void ShaderManager::loadPrograms(void)
@@ -127,8 +135,6 @@ void ShaderManager::loadPrograms(void)
         tempString.assign(shaderDirectory);
         tempString.append(fileName->d_name);
 
-        std::cout << tempString << std::endl;
-
         if(Util::StringLib::endsWith(tempString, ShaderProgram::FileExtension))
         {
             newProgram = new ShaderProgram(&tempString);
@@ -141,10 +147,12 @@ void ShaderManager::loadPrograms(void)
             {
                 delete newProgram;
             }
-
-            fileName = readdir(directory);
         }
+
+        fileName = readdir(directory);
     }
+
+    Util::Log::writeAt(localDebugLevel, "Found and loaded " + std::to_string(this->programs.size()) + " programs");
 }
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////
@@ -161,6 +169,9 @@ ShaderManager* ShaderManager::getShaderManager(void)
 void ShaderManager::init(void)
 {
     shaderManager = new ShaderManager();
+
+    shaderManager->loadShaders();
+    shaderManager->loadPrograms();
 }
 
 void ShaderManager::uninit(void)
