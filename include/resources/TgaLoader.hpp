@@ -3,18 +3,18 @@
 
 namespace Resources
 {
-	class Texture;
+    class Texture;
 
-	class TgaLoader
-	{
-	//Static Functions:
-	public:
+    class TgaLoader
+    {
+    //Static Functions:
+    public:
 
-		static void loadFromFile(const std::string& fileName, Texture* texture);
+        static void loadFromFile(const std::string& fileName, Texture* texture);
 
-	protected:
-	private:
-	};
+    protected:
+    private:
+    };
 }
 
 #endif

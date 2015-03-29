@@ -5,35 +5,35 @@
 
 namespace Resources
 {
-	class Texture
-	{
-	//Variables:
-	public:
+    class Texture
+    {
+    //Variables:
+    public:
 
-		unsigned int id;
+        unsigned int id;
 
-		int width;
-		int height;
+        int width;
+        int height;
 
-		float* pixels;
+        float* pixels;
 
-	protected:
-	private:
+    protected:
+    private:
 
-		bool hasData;
-		bool loaded;
+        bool hasData;
+        bool loaded;
 
-	//Functions:
-	public:
+    //Functions:
+    public:
 
-		Texture(const std::string& fileName);
-		~Texture(void);
+        Texture(const std::string& fileName);
+        ~Texture(void);
 
-		void uploadToGpu(void);
+        void uploadToGpu(void);
 
-	protected:
-	private:
-	};
+    protected:
+    private:
+    };
 }
 
 #endif

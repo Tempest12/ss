@@ -4,39 +4,39 @@ using namespace Core;
 
 Color::Color()
 {
-	this->set(0.0f);
+    this->set(0.0f);
 }
 
 Color::Color(float all)
 {
-	this->set(all);
+    this->set(all);
 }
 
 Color::Color(float red  , float green, float blue)
 {
-	this->set(red, green, blue);
+    this->set(red, green, blue);
 }
 
 Color::Color(float red  , float green, float blue, float alpha)
 {
-	this->set(red, green, blue, alpha);
+    this->set(red, green, blue, alpha);
 }
 
 
 void Color::set(float all)
 {
-	this->set(all, all, all, all);
+    this->set(all, all, all, all);
 }
 
 void Color::set(float red  , float green, float blue)
 {
-	this->set(red, green, blue, 1.0f);
+    this->set(red, green, blue, 1.0f);
 }
 
 void Color::set(float red  , float green, float blue , float alpha)
 {
-	this->red   = red;
-	this->green = green;
-	this->blue  = blue;
-	this->alpha = alpha;
+    this->red   = red;
+    this->green = green;
+    this->blue  = blue;
+    this->alpha = alpha;
 }

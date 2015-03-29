@@ -3,39 +3,39 @@
 
 namespace Core
 {
-	class Color
-	{
+    class Color
+    {
 
-	//Variables:
-	public:
-		
-		float red  ;
-		float green;
-		float blue ;
-		float alpha;
+    //Variables:
+    public:
+        
+        float red  ;
+        float green;
+        float blue ;
+        float alpha;
 
-	protected:
-	private:
+    protected:
+    private:
 
-	//Functions:
-	public:
+    //Functions:
+    public:
 
-		Color();
-		Color(float all);
-		Color(float red  , float green, float blue );
-		Color(float red  , float green, float blue , float alpha);
+        Color();
+        Color(float all);
+        Color(float red  , float green, float blue );
+        Color(float red  , float green, float blue , float alpha);
 
-		~Color();
+        ~Color();
 
-		void set(float all);
-		void set(float red, float green, float blue);
-		void set(float red, float green, float blue, float alpha);
+        void set(float all);
+        void set(float red, float green, float blue);
+        void set(float red, float green, float blue, float alpha);
 
-	protected:
-	private:
+    protected:
+    private:
 
 
-	};
+    };
 }
 
 #endif

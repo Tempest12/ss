@@ -5,7 +5,7 @@
 
 namespace Main
 {
-	void die(const std::string& errorMessage);
+    void die(const std::string& errorMessage);
 }
 
 

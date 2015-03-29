@@ -7,67 +7,67 @@
 
 namespace Util
 {
-	namespace StringLib
-	{
-		//Variables
-		extern std::string emptyString;
+    namespace StringLib
+    {
+        //Variables
+        extern std::string emptyString;
 
-		//Functions		
-		bool contains(std::string& base, std::string& target);
-		bool contains(std::string& base, const std::string& target);
-		bool contains(std::string* base, std::string* target);	
-		bool contains(std::string* base, const std::string& target);
+        //Functions     
+        bool contains(std::string& base, std::string& target);
+        bool contains(std::string& base, const std::string& target);
+        bool contains(std::string* base, std::string* target);  
+        bool contains(std::string* base, const std::string& target);
 
-		bool endsWith(const std::string& base, const std::string& end);
+        bool endsWith(const std::string& base, const std::string& end);
 
-		bool equalsIgnoreCase(std::string& one, std::string& two);
-		bool equalsIgnoreCase(std::string& one, const std::string& two);	
-		bool equalsIgnoreCase(std::string* one, std::string* two);
-		bool equalsIgnoreCase(std::string* one, const std::string& two);	
+        bool equalsIgnoreCase(std::string& one, std::string& two);
+        bool equalsIgnoreCase(std::string& one, const std::string& two);    
+        bool equalsIgnoreCase(std::string* one, std::string* two);
+        bool equalsIgnoreCase(std::string* one, const std::string& two);    
 
-		std::string* split(std::string* whole, char delimiter, int* numOf);
-		std::string* split(std::string& whole, char delimiter, int& numOf);
+        std::string* split(std::string* whole, char delimiter, int* numOf);
+        std::string* split(std::string& whole, char delimiter, int& numOf);
 
         bool startsWith(std::string* base, const std::string& start);
 
-		bool isWhiteSpace(std::string& line);
-		bool isWhiteSpace(std::string* line);
+        bool isWhiteSpace(std::string& line);
+        bool isWhiteSpace(std::string* line);
 
-		void trim(std::string& str);
-		void trim(std::string* str);
+        void trim(std::string& str);
+        void trim(std::string* str);
 
-		//Classes
-		class Hasher
-		{
-			//Properties:
-			public:
-			protected:
-			private:
+        //Classes
+        class Hasher
+        {
+            //Properties:
+            public:
+            protected:
+            private:
 
-			//Functions:
-			public:
-				size_t operator()(const std::string& key) const;
+            //Functions:
+            public:
+                size_t operator()(const std::string& key) const;
 
-			protected:
-			private:
-		};
+            protected:
+            private:
+        };
 
-		class KeyEquals
-		{
-			//Properties:
-			public:
-			protected:
-			private:
+        class KeyEquals
+        {
+            //Properties:
+            public:
+            protected:
+            private:
 
-			//Functions:
-			public:
-				bool operator()(const std::string& one, const std::string& two) const;
+            //Functions:
+            public:
+                bool operator()(const std::string& one, const std::string& two) const;
 
-			protected:
-			private:
+            protected:
+            private:
 
-		};
-	}
+        };
+    }
 }
 
 #endif

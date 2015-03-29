@@ -3,40 +3,40 @@
 
 namespace Math
 {
-	class Quaternionf
-	{
+    class Quaternionf
+    {
 
-	//Variables:
-	public:
+    //Variables:
+    public:
 
-		float x;
-		float y;
-		float z;
-		float w;
+        float x;
+        float y;
+        float z;
+        float w;
 
-	protected:
-	private:
+    protected:
+    private:
 
-	//Functions:
-	public:
+    //Functions:
+    public:
 
-		Quaternionf(void);
-		Quaternionf(Quaternionf* that);
-		~Quaternionf(void);
+        Quaternionf(void);
+        Quaternionf(Quaternionf* that);
+        ~Quaternionf(void);
 
-		void conjugate(void);
+        void conjugate(void);
 
-		float length(void);
+        float length(void);
 
-		void multiply(Quaternionf* that);
+        void multiply(Quaternionf* that);
 
-		void normalize(void);
+        void normalize(void);
 
 
-	protected:
-	private:
+    protected:
+    private:
 
-	};
+    };
 }
 
 #endif

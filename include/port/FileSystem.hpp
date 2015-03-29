@@ -2,21 +2,21 @@
 #define _PORT_FILE_SYSTEM_HPP
 namespace Port
 {
-	namespace FileSystem
-	{
-		char getSeparator()
-		{
-		#ifdef WINDOWS
-			
-			return '\\';
+    namespace FileSystem
+    {
+        char getSeparator()
+        {
+        #ifdef WINDOWS
+            
+            return '\\';
 
-		#else
+        #else
 
-			return '/';
-			
-		#endif
-		}
-	}
+            return '/';
+            
+        #endif
+        }
+    }
 }
 
 #endif

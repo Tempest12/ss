@@ -3,23 +3,23 @@
 
 namespace Core
 {
-	class Level
-	{
-	//Variables:
-	public:
-	protected:
-	private:
+    class Level
+    {
+    //Variables:
+    public:
+    protected:
+    private:
 
-	//Functions:
-	public:
+    //Functions:
+    public:
 
-		virtual Level* getNextLevel(void)   = 0;
-		virtual void   draw(void)           = 0;
-		virtual bool   update(float time)   = 0;
+        virtual Level* getNextLevel(void)   = 0;
+        virtual void   draw(void)           = 0;
+        virtual bool   update(float time)   = 0;
 
-	protected:
-	private:
-	};
+    protected:
+    private:
+    };
 }
 
 #endif
