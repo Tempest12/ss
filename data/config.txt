@@ -1,5 +1,11 @@
+section glut
+{
+    errorMessageBufferSize   50
+    warningMessageBufferSize 50
+}
+
 section window
 {
-	width  800
-	height 800
+    width  800
+    height 800
 }

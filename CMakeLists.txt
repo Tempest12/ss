@@ -27,4 +27,4 @@ include_directories(${CMAKE_SOURCE_DIR}/include)
 set_target_properties(ss PROPERTIES
                       RUNTIME_OUTPUT_DIRECTORY ${CMAKE_SOURCE_DIR})
 
-target_link_libraries(ss ${OPENGL_LIBRARIES} ${SDL2_LIBRARIES})
+target_link_libraries(ss ${OPENGL_LIBRARIES} ${GLEW_LIBRARIES} ${GLUT_LIBRARIES} ${SDL2_LIBRARIES})

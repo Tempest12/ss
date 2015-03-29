@@ -6,34 +6,40 @@
 //Forward declarations:
 namespace Levels
 {
-	class Level;
+    class Level;
 }
-
 
 namespace Core
 {
-	class GLCore
-	{
-	//Variables:
-	public:
-	protected:
-	private:
+    class GLCore
+    {
+    //Variables:
+    public:
+    protected:
+    private:
 
-	//Functions:
-	public:
-		static void init(int argc, char** argv);
-		static void draw(void);
-		static void functionKeys(int keyCode, int positionX, int positionY);
-		static void keyboard(unsigned char keyCode, int positionX, int positionY);
-		static void mouseClick(int buttonCode, int buttonState, int positionX, int positionY);
-		static void mouseActiveMotion(int positionX, int positionY);
-		static void mousePassiveMotion(int positionX, int positionY);
-		static void runLoop(void);
-		static void uninit(int returnCode);
-		static void update(float time);
+    //Functions:
+    public:
+        static void init(int argc, char** argv);
+        static void uninit(int returnCode);
 
-	protected:
-	private:  
-	};
+        static void draw(void);
+        static void functionKeys(int keyCode, int positionX, int positionY);
+
+        static void glutWarning(const char* message, va_list ap);
+        static void glutError  (const char* mesaage, va_list ap);
+
+        static void keyboard(unsigned char keyCode, int positionX, int positionY);
+        static void mouseClick(int buttonCode, int buttonState, int positionX, int positionY);
+        static void mouseActiveMotion(int positionX, int positionY);
+        static void mousePassiveMotion(int positionX, int positionY);
+
+        static void runLoop(void);
+
+        static void update(float time);
+
+    protected:
+    private:
+    };
 }
 #endif

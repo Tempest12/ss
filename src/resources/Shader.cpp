@@ -3,8 +3,8 @@
 #include <vector>
 
 #include <string.h>
-//#include <GL/glew.h>
-//#include <GL/glut.h>
+#include <GL/glew.h>
+#include <GL/freeglut.h>
 
 #include "main/Main.hpp"
 #include "resources/Shader.hpp"
@@ -26,7 +26,7 @@ Shader::Shader(std::string* fileName)
     }
 
     //Create Shader and set the source.
-    //this->id = glCreateShader(this->type);
+    this->id = glCreateShader(this->type);
 
     this->setSource();
     
@@ -41,9 +41,9 @@ void Shader::compile(void)
 {
     int errorCode = 0;
 
-    //glCompileShader(this->id);
+    glCompileShader(this->id);
     
-    //glGetShaderiv(this->id, GL_COMPILE_STATUS, &errorCode);
+    glGetShaderiv(this->id, GL_COMPILE_STATUS, &errorCode);
     
     if(errorCode == GL_FALSE)
     {
@@ -51,9 +51,9 @@ void Shader::compile(void)
         int logSize = 0;
         char* errorLog;    
         
-        //glGetShaderiv(this->id, GL_INFO_LOG_LENGTH, &logSize);   
+        glGetShaderiv(this->id, GL_INFO_LOG_LENGTH, &logSize);   
         errorLog = new char[logSize];
-        //glGetShaderInfoLog(this->id, logSize, NULL, errorLog);
+        glGetShaderInfoLog(this->id, logSize, NULL, errorLog);
 
         Main::die("Shader \"" + this->name + "\" Failed to compile.  Compilation error message \"" + errorLog + "\".");
     }
@@ -135,7 +135,7 @@ void Shader::setSource(void)
     }
     
     //Set the source:
-    //glShaderSource(this->id, 1, (const char**)&shaderSource, (int*)&shaderLength);
+    glShaderSource(this->id, 1, (const char**)&shaderSource, (int*)&shaderLength);
     
     //Clean up:
     delete[] shaderSource;
