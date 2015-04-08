@@ -4,12 +4,10 @@
 #include <string>
 #include <vector>
 
+#include "main/ForwardDeclarations.hpp"
+
 namespace Resources
 {
-    //Forward delclarations:
-    class Shader;
-    class ShaderProgram;
-
     class ShaderManager
     {
     //Variables:

@@ -3,12 +3,10 @@
 
 #include <string>
 
+#include "main/ForwardDeclarations.hpp"
+
 namespace Resources
 {
-    //Forward Declarations:
-    class Shader;
-
-
     class ShaderProgram
     {
 

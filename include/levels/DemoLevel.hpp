@@ -2,13 +2,7 @@
 #define _LEVELS_DEMOLEVEL_HPP
 
 #include "Level.hpp"
-
-namespace Resources
-{
-    class Shader;
-    class ShaderManager;
-    class ShaderProgram;
-}
+#include "main/ForwardDeclarations.hpp"
 
 namespace Levels
 {

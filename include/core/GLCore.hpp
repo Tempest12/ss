@@ -3,11 +3,7 @@
 
 #include <chrono>
 
-//Forward declarations:
-namespace Levels
-{
-    class Level;
-}
+#include "main/ForwardDeclarations.hpp"
 
 namespace Core
 {
