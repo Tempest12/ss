@@ -6,10 +6,12 @@
 #include "resources/TgaHeader.hpp"
 #include "resources/TgaLoader.hpp"
 
+//Namespace this code belongs to:
 using namespace Resources;
 
-void TgaLoader::loadFromFile(const std::string& fileName, Texture* texture)
+Texture* TgaLoader::loadFromFile(const std::string& fileName)
 {
+    Texture*      texture = new Texture(fileName);
     std::ifstream file;
 
     file.open(fileName, std::ifstream::in);
@@ -42,13 +44,13 @@ void TgaLoader::loadFromFile(const std::string& fileName, Texture* texture)
 
             for(unsigned int index = 0; index < size;)
             {
-                file.read((char*)&blue, 1);
+                file.read((char*)&blue,  1);
                 file.read((char*)&green, 1);
-                file.read((char*)&red, 1);
+                file.read((char*)&red,   1);
 
-                texture->pixels[index++] = red * converter;
+                texture->pixels[index++] = red   * converter;
                 texture->pixels[index++] = green * converter;
-                texture->pixels[index++] = blue * converter;
+                texture->pixels[index++] = blue  * converter;
                 texture->pixels[index++] = 1.0f;
             }
 
@@ -69,14 +71,14 @@ void TgaLoader::loadFromFile(const std::string& fileName, Texture* texture)
 
             for(unsigned int index = 0; index < size;)
             {
-                file.read((char*)&blue, 1);
+                file.read((char*)&blue , 1);
                 file.read((char*)&green, 1);
-                file.read((char*)&red, 1);
+                file.read((char*)&red  , 1);
                 file.read((char*)&alpha, 1);
 
-                texture->pixels[index++] = red * converter;
+                texture->pixels[index++] = red   * converter;
                 texture->pixels[index++] = green * converter;
-                texture->pixels[index++] = blue * converter;
+                texture->pixels[index++] = blue  * converter;
                 texture->pixels[index++] = alpha * converter;
             }
 
@@ -89,13 +91,5 @@ void TgaLoader::loadFromFile(const std::string& fileName, Texture* texture)
             break;
     }
 
-    unsigned int size = texture->width * texture->height * 4;
-
-    for(unsigned int index = 0; index < size; index++)
-    {
-        if(texture->pixels[index] > 1.0)
-        {
-            std::cout << "Whoops pixels value is not correct." << std::endl;
-        }
-    }
+    return texture;
 }

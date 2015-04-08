@@ -17,7 +17,7 @@ int main(int argc, char** argv)
     Util::Log::   init(false, INFO);
     Core::GLCore::init(argc , argv);
 
-    //glutMainLoop();
+    glutMainLoop();
 
     return result;
 }

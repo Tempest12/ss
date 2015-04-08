@@ -6,7 +6,6 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 
-
 namespace Resources
 {
     enum ShaderType
@@ -19,7 +18,7 @@ namespace Resources
         GEOMETRY    = GL_GEOMETRY_SHADER,
         FRAGMENT    = GL_FRAGMENT_SHADER,
         //COMPUTE     = GL_COMPUTE_SHADER,
-        
+
         //Unsupported:
         TESSCONTROL = -1,
         TESSEVAL    = -2,
@@ -28,22 +27,22 @@ namespace Resources
 
     class Shader
     {
-    
+
     //Variables:
     public:
         std::string  name;
         ShaderType   type;
         unsigned int id;
-        
+
     protected:
     private:
-    
+
     //Functions:
     public:
-        
+
         Shader(std::string* fileName);
         ~Shader();
-        
+
         void compile(void);
         void getTypeFromFileName(void);
         void setSource(void);

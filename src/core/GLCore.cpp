@@ -18,7 +18,7 @@
 
 
 #include "core/GLCore.hpp"
-#include "levels/LevelList.hpp"
+#include "levels/DemoLevel.hpp"
 #include "main/Main.hpp"
 #include "math/Vector3f.hpp"
 #include "resources/Texture.hpp"
@@ -29,7 +29,7 @@
 //The namespace this code belongs to:
 using namespace Core;
 
-//static int windowID;
+static int windowID;
 
 static std::stringstream* stringStream;
 
@@ -53,13 +53,13 @@ void GLCore::init(int argc, char** argv)
     glutInitWarningFunc(GLCore::glutWarning);
     glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_DEPTH);
     glutInit(&argc, argv);
-    //glutInitContextVersion(3, 0);
-    //glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);
+    glutInitContextVersion(3, 0);
+    glutInitContextFlags(GLUT_CORE_PROFILE | GLUT_DEBUG);
 
     //Window init:
     glutInitWindowSize(Util::Config::convertSettingToInt("window", "width" ),
                        Util::Config::convertSettingToInt("window", "height"));
-    glutCreateWindow("Solar Shard");
+    windowID = glutCreateWindow("Solar Shard");
 
     //Glew Init:
     GLenum errorCode = glewInit();
@@ -70,18 +70,17 @@ void GLCore::init(int argc, char** argv)
     }
 
     //Register Callbacks:
-    /*glutDisplayFunc      (GLCore::draw);
+    glutDisplayFunc      (GLCore::draw);
     glutIdleFunc         (GLCore::runLoop);
     glutKeyboardFunc     (GLCore::keyboard);
     glutMouseFunc        (GLCore::mouseClick);
     glutMotionFunc       (GLCore::mouseActiveMotion);
     glutPassiveMotionFunc(GLCore::mousePassiveMotion);
-    glutSpecialFunc      (GLCore::functionKeys);*/
+    glutSpecialFunc      (GLCore::functionKeys);
 
     //Load resources:
     Resources::ShaderManager::init();
 
-    //glutPostRedisplay();
     currentLevel = new Levels::DemoLevel();
 }
 
@@ -89,7 +88,8 @@ void GLCore::draw(void)
 {
     currentLevel->render();
 
-    //glutPostRedisplay();
+    //Show the completed frame buffer to the user:
+    glutSwapBuffers();
 }
 
 void GLCore::functionKeys(int keyCode, int positionX, int positionY)
@@ -155,10 +155,15 @@ void GLCore::runLoop(void)
     lastClock = currentClock;
 
     currentLevel->update(temp);
+
+    //This should make glut call the draw function:
+    glutPostRedisplay();
 }
 
 void GLCore::uninit(int returnCode)
 {
+    Resources::ShaderManager::uninit();
+
     Util::Log::uninit();
     Util::Config::uninit();
 

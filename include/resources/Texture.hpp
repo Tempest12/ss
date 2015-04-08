@@ -10,6 +10,8 @@ namespace Resources
     //Variables:
     public:
 
+        std::string name;
+
         unsigned int id;
 
         int width;
@@ -17,10 +19,11 @@ namespace Resources
 
         float* pixels;
 
+        bool   hasData;
+
     protected:
     private:
 
-        bool hasData;
         bool loaded;
 
     //Functions:

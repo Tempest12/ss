@@ -10,7 +10,7 @@ namespace Resources
     //Static Functions:
     public:
 
-        static void loadFromFile(const std::string& fileName, Texture* texture);
+        static Texture* loadFromFile(const std::string& fileName);
 
     protected:
     private:

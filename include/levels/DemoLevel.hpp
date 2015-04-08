@@ -3,6 +3,13 @@
 
 #include "Level.hpp"
 
+namespace Resources
+{
+    class Shader;
+    class ShaderManager;
+    class ShaderProgram;
+}
+
 namespace Levels
 {
     class DemoLevel: public Level
@@ -10,6 +17,8 @@ namespace Levels
 
     //Variables:
     public:
+        Resources::ShaderProgram* shaderProgram;
+
     protected:
     private:
 

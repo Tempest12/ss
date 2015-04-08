@@ -11,30 +11,30 @@ namespace Resources
 
     class ShaderProgram
     {
-    
+
     //Variables:
     public:
-        
+
         int id;
-        
+
         bool status;
-        
+
         std::string name;
-    
+
     protected:
     private:
-    
+
         Shader* shaders[5];
         int     shaderCount;
-    
+
     //Functions:
     public:
-    
+
         ShaderProgram(std::string* fileName);
         ~ShaderProgram();
-        
+
         void link(void);
-    
+
     protected:
     private:
 

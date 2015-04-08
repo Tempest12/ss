@@ -17,7 +17,7 @@
 using namespace Resources;
 
 //Debug status for this code:
-static LogLevel localDebugLevel = SPECIAL;
+static LogLevel localDebugLevel = DEBUG;
 
 ShaderManager::ShaderManager(void)
 {
@@ -134,6 +134,8 @@ void ShaderManager::loadPrograms(void)
     {
         tempString.assign(shaderDirectory);
         tempString.append(fileName->d_name);
+
+        std::cout << tempString << std::endl;
 
         if(Util::StringLib::endsWith(tempString, ShaderProgram::FileExtension))
         {
